@@ -20,7 +20,7 @@ import time
 from inspect import getmembers, isfunction
 import os.path
 from pyVHR.deepRPPG.mtts_can import *
-
+import biosppy
 class Pipeline():
     """ 
     This class runs the pyVHR pipeline on a single video or dataset
@@ -162,6 +162,8 @@ class Pipeline():
 
         if verb:
             print("\nBPM estimation with: %s" % (bpm_type))
+        new_result = biosppy.signals.bvp.bvp(bvps)
+        print(new_result)
         # -- BPM Estimation
         if bpm_type == 'welch':
             bpmES = BVP_to_BPM(bvps, fps, minHz=0.65, maxHz=4.0)
